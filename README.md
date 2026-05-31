@@ -1,6 +1,6 @@
 ## Dataset
 All the trees and CSV files with the SPR distances are allocated here:
-https://doi.org/10.5281/zenodo.20476872
+https://zenodo.org/records/20476872
 
 ## Command Line Interface (CLI)
 
