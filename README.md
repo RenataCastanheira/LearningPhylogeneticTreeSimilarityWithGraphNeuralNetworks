@@ -59,9 +59,8 @@ python predict.py \
 | `--model_weights` | `str` | *Required* | Exact path to the weight file saved during training (ex: `runs/spr_gnn_base/best_model.pth`).               |
 | `--out-predictions`| `str` | `predictions_output.csv`| Path to the new CSV file where the final table containing the `predicted_spr_distance`column will be saved. |
 | `--pool` | `str` | `add` | *Attention*: Must be identical to the pooling type (`add` or `mean) used during the training phase.         |
-| `--log-target` | `flag` | *Disabled* | *Attention*: Must be enabled if (and only if) the loaded model was trained using the `--log-target` flag.   |
 | `--hidden-dim` | `int` | `128` | Hidden dimension of the model layers (must match the training configuration).                                        |
 | `--embed-dim` | `int` | `16` | Embedding dimension of the model (must match the training configuration).                                            |
-| `--device` | `str` | `cuda`/`cpu` | Hardware where the model will run predictions (automatically detects if a GPU is available).                                 |
+| `--device` | `str` | `cpu` | Hardware where the model will run predictions (automatically detects if a GPU is available).                                 |
 
     
