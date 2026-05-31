@@ -35,7 +35,6 @@ python processTree.py \
 | `--hidden-dim` | `int` | `128` | Hidden dimension size of the GIN layers in the network.                                                       |
 | `--embed-dim` | `int` | `16` | Vector dimension size for the taxonomic node ID embedding matrix.                                   |
 | `--pool` | `str` | `add` | Graph pooling aggregation strategy. Choices: `add` or `mean.                                 |
-| `--log-target` | `flag` | *Disabled* | If enabled, the model trains on the log-scale target $\log(1 + \text{SPR})$ log(1+SPR) to stabilize outliers. |
 | `--device` | `str` | `cuda`/`cpu` | Automatic choice of training hardware (uses GPU if available).                                   |
 
 ### 2. Running Inference / Predictions (predict.py)
