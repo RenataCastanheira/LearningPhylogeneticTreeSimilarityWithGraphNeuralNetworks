@@ -1,3 +1,7 @@
+## Dataset
+All the trees and CSV files with the SPR distances are allocated here:
+https://doi.org/10.5281/zenodo.20476872
+
 ## Command Line Interface (CLI)
 
 Our tool provides two main entry points via the command line: one for training the Graph Neural Network from scratch 
