@@ -2,6 +2,33 @@
 All the trees and CSV files with the SPR distances are allocated here:
 https://zenodo.org/records/20476872
 
+## Environment Setup & Dependencies
+
+To ensure reproducibility and correct execution of the pipeline, you need to set up a Python environment with the required core scientific and deep learning libraries. 
+
+### Prerequisites
+* **Python**: `3.9` or higher recommended.
+
+### Software Dependencies
+The core libraries utilized across the data codification, training, and inference workflows are:
+* **PyTorch** (`torch`): Core deep learning framework.
+* **PyTorch Geometric** (`torch_geometric`): To manage graph datasets and execution of the Graph Isomorphism Network (GIN).
+* **NetworkX** (`networkx`): For intermediate graph parsing, node mapping, and shortest path calculations.
+* **Biopython** (`Bio`): To parse Newick phylogenetic trees and apply biological pre-processing steps (e.g., midpoint rooting).
+* **Pandas & NumPy**: For matrix operations, metric logs management, and dataset handling.
+
+---
+
+### Step-by-Step Installation
+
+Follow these instructions to configure a localized Virtual Environment (`.venv`) and install all software constraints:
+
+#### 1. Clone the Repository
+```bash
+git clone [https://github.com/RenataCastanheira/LearningPhylogeneticTreeSimilarityWithGraphNeuralNetworks.git](https://github.com/RenataCastanheira/LearningPhylogeneticTreeSimilarityWithGraphNeuralNetworks.git)
+cd LearningPhylogeneticTreeSimilarityWithGraphNeuralNetworks
+```
+
 ## Command Line Interface (CLI)
 
 Our tool provides two main entry points via the command line: one for training the Graph Neural Network from scratch 
