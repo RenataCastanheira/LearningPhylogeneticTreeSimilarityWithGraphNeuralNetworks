@@ -1,0 +1,13 @@
+Best val MAE: 102.6131 (epoch 103)
+Test  MAE: 127.1259
+Test  RMSE: 202.2387
+Test  R2:  0.8726
+Test  MAPE: 1.7969
+Baseline mean-MAE:   485.7811
+Baseline median-MAE: 464.5000
+num_species: 9659
+hidden_dim: 128
+dropout: 0.3
+pool: add
+log_target: False
+seed: 42

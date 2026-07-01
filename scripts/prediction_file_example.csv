@@ -1,0 +1,11 @@
+specie,size,pathA,pathB
+clostridium,small,repository/clostridium_318_upgma.nwk, repository/clostridium_318_sh_upgma.nwk
+clostridium,small,repository/clostridium_90_nj.nwk, repository/clostridium_90_nj.nwk
+vibrio,small,repository/vibrio_545_nj.nwk, repository/vibrio_545_sh_nj.nwk
+pneumonia,small,repository/pneumonia_166_upgma.nwk,repository/pneumonia_166_nj.nwk
+pneumonia,small,repository/pneumonia_393_nj.nwk,repository/pneumonia_393_sh_nj.nwk
+salmonella,small,repository/salmonella_848_upgma.nwk,repository/salmonella_848_sh_upgma.nwk
+pneumonia,medium,repository/pneumonia_3667_upgma.nwk,repository/pneumonia_3667_nj.nwk
+pneumonia,medium,repository/pneumonia_5000_nj.nwk,repository/pneumonia_5000_sh_nj.nwk
+salmonella,medium,repository/salmonella_5333_upgma.nwk,repository/salmonella_5333_sh_upgma.nwk
+vibrio,medium,repository/vibrio_3333_upgma.nwk,repository/vibrio_3333_nj.nwk

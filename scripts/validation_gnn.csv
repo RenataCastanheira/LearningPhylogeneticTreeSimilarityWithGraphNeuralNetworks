@@ -1,0 +1,51 @@
+specie,size,pathA,pathB,SPR_distance
+clostridium,small,repository/clostridium_621_upgma.nwk, repository/clostridium_621_upgma.nwk, 0
+vibrio,small,repository/vibrio_924_upgma.nwk, repository/vibrio_924_nj.nwk, 226
+vibrio,small,repository/vibrio_772_upgma.nwk, repository/vibrio_772_nj.nwk, 168
+pneumonia,small,repository/pneumonia_848_upgma.nwk,repository/pneumonia_848_sh_upgma.nwk,19
+salmonella,small,repository/salmonella_166_upgma.nwk,repository/salmonella_166_nj.nwk,17
+salmonella,small,repository/salmonella_393_nj.nwk,repository/salmonella_393_sh_nj.nwk,0
+pneumonia,medium,repository/pneumonia_2667_upgma.nwk,repository/pneumonia_2667_sh_upgma.nwk,55
+salmonella,medium,repository/salmonella_5667_upgma.nwk,repository/salmonella_5667_nj.nwk,765
+salmonella,medium,repository/salmonella_4333_nj.nwk,repository/salmonella_4333_sh_nj.nwk,6
+vibrio,medium,repository/vibrio_4000_upgma.nwk,repository/vibrio_4000_sh_upgma.nwk,204
+clostridium,large,repository/clostridium_7400_nj.nwk, repository/clostridium_7400_sh_nj.nwk, 62
+clostridium,large,repository/clostridium_8700_upgma.nwk, repository/clostridium_8700_sh_upgma.nwk, 775
+clostridium,large,repository/clostridium_8300_nj.nwk, repository/clostridium_8300_nj.nwk, 0
+clostridium,large,repository/clostridium_7500_upgma.nwk, repository/clostridium_7500_upgma.nwk, 0
+salmonella,large,repository/salmonella_7600_upgma.nwk,repository/salmonella_7600_sh_upgma.nwk,317
+salmonella,large,repository/salmonella_7000_nj.nwk,repository/salmonella_7000_nj.nwk,0
+salmonella,large,repository/salmonella_7300_upgma.nwk,repository/salmonella_7300_upgma.nwk,0
+pneumonia,large,repository/pneumonia_7800_nj.nwk,repository/pneumonia_7800_sh_nj.nwk,0
+pneumonia,large,repository/pneumonia_8400_upgma.nwk,repository/pneumonia_8400_sh_upgma.nwk,211
+pneumonia,large,repository/pneumonia_7100_nj.nwk,repository/pneumonia_7100_nj.nwk,0
+pneumonia,large,repository/pneumonia_8500_upgma.nwk,repository/pneumonia_8500_upgma.nwk,0
+vibrio,large,repository/vibrio_8800_nj.nwk,repository/vibrio_8800_sh_nj.nwk,25
+vibrio,large,repository/vibrio_8300_upgma.nwk,repository/vibrio_8300_sh_upgma.nwk,515
+vibrio,large,repository/vibrio_9100_nj.nwk,repository/vibrio_9100_nj.nwk,0
+vibrio,large,repository/vibrio_9100_upgma.nwk,repository/vibrio_9100_upgma.nwk,0
+pneumonia,large,repository/pneumonia_9000_upgma.nwk,repository/pneumonia_9000_sh_upgma.nwk,216
+pneumonia,large,repository/pneumonia_7700_nj.nwk,repository/pneumonia_7700_nj.nwk,0
+pneumonia,large,repository/pneumonia_7000_upgma.nwk,repository/pneumonia_7000_upgma.nwk,0
+salmonella,large, repository/salmonella_8500_upgma.nwk, repository/salmonella_8500_nj.nwk,1185
+salmonella,large, repository/salmonella_7300_upgma.nwk, repository/salmonella_7300_nj.nwk,1032
+salmonella,large,repository/salmonella_8500_nj.nwk,repository/salmonella_8500_sh_nj.nwk,4
+vibrio,large,repository/vibrio_7400_upgma.nwk,repository/vibrio_7400_nj.nwk,1382
+vibrio,large,repository/vibrio_9200_nj.nwk,repository/vibrio_9200_sh_nj.nwk,28
+vibrio,large,repository/vibrio_9100_upgma.nwk,repository/vibrio_9100_sh_upgma.nwk,658
+clostridium,large,repository/clostridium_7800_nj.nwk,repository/clostridium_7800_sh_nj.nwk,60
+clostridium,large,repository/clostridium_8000_upgma.nwk,repository/clostridium_8000_sh_upgma.nwk,705
+clostridium,large,repository/clostridium_7400_nj.nwk,repository/clostridium_7400_nj.nwk,0
+pneumonia,medium,repository/pneumonia_6000_upgma.nwk,repository/pneumonia_6000_sh_upgma.nwk,145
+salmonella,medium,repository/salmonella_2000_upgma.nwk,repository/salmonella_2000_nj.nwk,188
+salmonella,medium,repository/salmonella_4667_nj.nwk,repository/salmonella_4667_sh_nj.nwk,6
+vibrio,medium,repository/vibrio_2000_upgma.nwk,repository/vibrio_2000_sh_upgma.nwk,138
+clostridium,medium,repository/clostridium_4667_nj.nwk,repository/clostridium_4667_sh_nj.nwk,28
+clostridium,medium,repository/clostridium_2000_upgma.nwk,repository/clostridium_2000_sh_upgma.nwk,121
+clostridium,medium,repository/clostridium_3333_upgma.nwk,repository/clostridium_3333_nj.nwk,477
+pneumonia,small,repository/pneumonia_545_upgma.nwk,repository/pneumonia_545_sh_upgma.nwk,13
+salmonella,small,repository/salmonella_697_upgma.nwk,repository/salmonella_697_nj.nwk,69
+salmonella,small,repository/salmonella_166_nj.nwk,repository/salmonella_166_sh_nj.nwk,1
+vibrio,small,repository/vibrio_924_nj.nwk,repository/vibrio_924_sh_nj.nwk,0
+clostridium,small,repository/clostridium_848_upgma.nwk,repository/clostridium_848_nj.nwk,132
+clostridium,small,repository/clostridium_848_nj.nwk,repository/clostridium_848_sh_nj.nwk,0
