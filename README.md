@@ -1,10 +1,12 @@
-# Pipeline for the tool: Approximating SPR Distance Between Phylogenetic Trees with Graph Neural Networks
-This repository contains a tool based on Graph Neural Networks(GNN) to predict the SPR (Subtree Prune-and-Regraft) 
+# Tool Pipeline: Approximating SPR Distance Between Phylogenetic Trees with Graph Neural Networks
+
+This repository contains a tool based on Graph Neural Networks (GNNs) to predict the SPR (Subtree Prune-and-Regraft)
 distance between pairs of phylogenetic trees.
 
-The pipeline includes the `run.py` script, which automates the entire data management process: it downloads and extracts
-the tree files from Zenodo, cleans theirs suffixes, aligns the CSV file with the trees to be predicted,  and runs inference
-in a fully integrated workflow.
+The pipeline includes the `runPredictions.py` script, which automates the entire data management process: it downloads and
+extracts the tree files from Zenodo, removes unnecessary suffixes, aligns the CSV file with the trees to be predicted, and
+runs inference in a fully integrated workflow.
+
 
 ## Dataset
 All the trees and CSV files with the SPR distances are allocated here:
