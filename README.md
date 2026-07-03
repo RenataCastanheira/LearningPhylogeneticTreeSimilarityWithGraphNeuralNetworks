@@ -54,7 +54,13 @@ To run  predictions on your own computer, go into the `tool` directory and execu
 cd tool
 python runPredictions.py
        --csv your/prefiction/file.csv
-```      
+```
+> **Note:** An example prediction file is available at:
+>
+> `scripts/prediction_file_example.csv`
+>
+> You can use it as a reference to create your own prediction file.
+
  Optional arguments 
 - `--model_weights`: path to the trained model weights. If omitted, the default model weights are used.
 ```bash
@@ -72,15 +78,10 @@ With this command, the script:
 3. Validates and filters the CSV file.
 4. Loads the model with the trained weights and saves the final results to `your/final_results.csv`.
 
-> **Note:** An example prediction file is available at:
->
-> `scripts/prediction_file_example.csv`
->
-> You can use it as a reference to create your own prediction file.
-
 
 
 ### How to use the tool pipeline for training 
 
+In process...
 
 
