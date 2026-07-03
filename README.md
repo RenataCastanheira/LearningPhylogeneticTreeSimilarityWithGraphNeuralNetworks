@@ -53,7 +53,7 @@ To run  predictions on your own computer, go into the `tool` directory and execu
 ```bash
 cd <tool_dir>
 python runPredictions.py
-       --csv your/prefiction/file.csv
+       --csv <your_prefiction_file>.csv
 ```
 > **Note:** An example prediction file is available at:
 >
