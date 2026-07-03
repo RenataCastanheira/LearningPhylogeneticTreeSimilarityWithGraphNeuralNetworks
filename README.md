@@ -84,6 +84,6 @@ With this command, the script:
 
 ### How to use the tool pipeline for training 
 
-In process...
+In progress...
 
 
