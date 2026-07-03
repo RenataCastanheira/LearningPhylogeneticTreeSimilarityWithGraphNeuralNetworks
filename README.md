@@ -66,12 +66,12 @@ The `<tool_dir>` in the `cd` command refers to the project's root directory. All
  Optional arguments 
 - `--model_weights`: path to the trained model weights. If omitted, the default model weights are used.
 ```bash
-       --model_weights your/trained/weights.pth
+       --model_weights  <your_trained_weights>.pth
 ```
 - `--out-predictions`: path where the final results will be saved. If omitted, the results are saved to
   `tool/scripts/FINAL_RESULTS.csv`.
 ```bash
-       --out-predictions your/final_results.csv 
+       --out-predictions <your_final_results>.csv 
 ```
 With this command, the script:
 1.  Checks whether the `tool/repository/` folder exists locally. If it does not, it downloads the
