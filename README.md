@@ -51,7 +51,7 @@ the data download from Zenodo.
 
 To run  predictions on your own computer, go into the `tool` directory and execute:
 ```bash
-cd tool
+cd <tool_dir>
 python runPredictions.py
        --csv your/prefiction/file.csv
 ```
@@ -60,6 +60,8 @@ python runPredictions.py
 > `scripts/prediction_file_example.csv`
 >
 > You can use it as a reference to create your own prediction file.
+
+The `<tool_dir>` in the `cd` command refers to the project's root directory. All tool commands must be run from there.
 
  Optional arguments 
 - `--model_weights`: path to the trained model weights. If omitted, the default model weights are used.
