@@ -28,7 +28,7 @@ Open the terminal in the project root and execute the following commands:
 
 ```bash
 # 1. Clone the Repository
-git clone [https://github.com/RenataCastanheira/LearningPhylogeneticTreeSimilarityWithGraphNeuralNetworks.git](https://github.com/RenataCastanheira/LearningPhylogeneticTreeSimilarityWithGraphNeuralNetworks.git)
+git clone https://github.com/RenataCastanheira/LearningPhylogeneticTreeSimilarityWithGraphNeuralNetworks.git
 cd LearningPhylogeneticTreeSimilarityWithGraphNeuralNetworks
 ```
 
