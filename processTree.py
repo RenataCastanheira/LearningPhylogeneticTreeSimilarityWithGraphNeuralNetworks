@@ -1,20 +1,17 @@
 """
-Train and evaluate the Siamese-GIN SPR-distance predictor.
+Train and evaluate the Siamese-GIN SPR-distance predictor using strict CSV splits.
 
 Usage:
-    python processTree.py \\
-        --csv      /path/to/spr_metrics.csv \\
-        --zenodo_scripts /path/to/zenodo_scripts \\
-        --out-dir  runs/spr_gnn_full \\
+    python processTree.py \
+        --train-csv /path/to/train.csv \
+        --val-csv   /path/to/val.csv \
+        --test-csv  /path/to/test.csv \
+        --repository /path/to/repository \
+        --out-dir  runs/spr_gnn_full \
         --num-epochs 300 --batch-size 16 --patience 25
-
-Expected CSV columns:
-    specie, category, size, type, spr_distance
-Optional (for mixed-shuffle pairs like "NJ vs NJ_sh"):
-    sh_a, sh_b   (booleans / 0-1)
 """
 
-# Imports padrão...
+import sys
 import argparse
 import random
 import numpy as np
@@ -48,107 +45,111 @@ def set_seed(seed: int) -> None:
 def resolve_pair_filenames(row, repo_path: Path) -> tuple[Path, Path]:
     """
     Build the two .nwk paths for one CSV row.
-
-    Directly uses 'pathA'/'patha' and 'pathB'/'pathb' columns from the CSV,
-    ensuring compatibility by removing any redundant 'zenodo_scripts/' prefix.
     """
-    # Procura pela coluna tanto em maiúsculas como em minúsculas
-    col_a = "pathA" if "pathA" in row else "patha"
-    col_b = "pathB" if "pathB" in row else "pathb"
+    # Procura flexível pelas colunas já convertidas em minúsculas
+    col_a = "patha" if "patha" in row else ("tree_1" if "tree_1" in row else "pathA")
+    col_b = "pathb" if "pathb" in row else ("tree_2" if "tree_2" in row else "pathB")
 
     p_a = str(row[col_a]).strip()
     p_b = str(row[col_b]).strip()
 
-    # Se o CSV já traz "zenodo_scripts/nome.nwk", removemos "zenodo_scripts/"
-    # para evitar caminhos duplicados como "zenodo_scripts/zenodo_scripts/nome.nwk"
-    if p_a.startswith("zenodo_scripts/"):
-        p_a = p_a.replace("zenodo_scripts/", "", 1)
-    if p_b.startswith("zenodo_scripts/"):
-        p_b = p_b.replace("zenodo_scripts/", "", 1)
+    # Remove qualquer prefixo redundante que possa vir no CSV para evitar caminhos duplicados
+    for prefix in ["zenodo_scripts/", "repository/"]:
+        if p_a.startswith(prefix):
+            p_a = p_a.replace(prefix, "", 1)
+        if p_b.startswith(prefix):
+            p_b = p_b.replace(prefix, "", 1)
 
-    # Combina o repo_path (passado por argumento) com o nome limpo do ficheiro
     return repo_path / p_a, repo_path / p_b
 
 
-# --------------------------------------------------------------------------- #
-# Main
-# --------------------------------------------------------------------------- #
-def main():
-    p = argparse.ArgumentParser(description="Train Siamese GIN SPR predictor.")
-    p.add_argument("--csv", required=True,
-                   help="C"
-                        "SV with columns specie,category,size,type,spr_distance [+ sh_a,sh_b]")
-    p.add_argument("--zenodo_scripts", required=True, help="Folder with the .nwk files")
-    p.add_argument("--out-dir", default="runs/spr_gnn",
-                   help="Where to save weights, training curve, predictions")
-    # training
-    p.add_argument("--num-epochs", type=int, default=300)
-    p.add_argument("--batch-size", type=int, default=16)
-    p.add_argument("--lr", type=float, default=1e-4)
-    p.add_argument("--weight-decay", type=float, default=1e-4)
-    p.add_argument("--patience", type=int, default=25,
-                   help="Early-stop patience on val MAE (epochs).")
-    p.add_argument("--lr-patience", type=int, default=10,
-                   help="ReduceLROnPlateau patience (epochs).")
-    # model
-    p.add_argument("--hidden-dim", type=int, default=128)
-    p.add_argument("--embed-dim", type=int, default=16)
-    p.add_argument("--dropout", type=float, default=0.3)
-    p.add_argument("--pool", default="add", choices=["add", "mean"])
-    # data
-    p.add_argument("--val-frac", type=float, default=0.15)
-    p.add_argument("--test-frac", type=float, default=0.15)
-    p.add_argument("--seed", type=int, default=42)
-    p.add_argument("--log-target", action="store_true",
-                   help="Train on log1p(SPR); evaluate in original scale.")
-    p.add_argument("--device",
-                   default="cuda" if torch.cuda.is_available() else "cpu")
-    args = p.parse_args()
+def process_single_csv(csv_path: Path, repo_path: Path, name: str) -> list:
+    """
+    Lê um ficheiro CSV específico e resolve os caminhos físicos das árvores.
+    """
+    df = pd.read_csv(csv_path)
+    df.columns = df.columns.str.lower().str.strip()
 
-    set_seed(args.seed)
-    out_dir = Path(args.out_dir); out_dir.mkdir(parents=True, exist_ok=True)
-    repo_path = Path(args.repository)
-    device = torch.device(args.device)
-    print(f"Device: {device}\nSeed:   {args.seed}\nOutDir: {out_dir.resolve()}\n")
+    if 'patha' not in df.columns and 'tree_1' in df.columns:
+        df = df.rename(columns={'tree_1': 'patha', 'tree_2': 'pathb'})
 
-    # ----- 1. Load CSV and resolve file paths ------------------------------ #
-    df = pd.read_csv(args.csv)
-    df.columns = df.columns.str.lower()
-    print(f"CSV: {len(df)} rows from {args.csv}")
+    print(f"CSV {name}: {len(df)} rows from {csv_path}")
 
     rows, missing = [], 0
     for _, row in df.iterrows():
         try:
             fa, fb = resolve_pair_filenames(row, repo_path)
         except Exception as e:
-            print(f"  [!] bad row skipped: {e}")
+            print(f"  [!] bad row skipped in {name}: {e}")
             missing += 1
             continue
+
+        # Verificação robusta: se não encontrar com .nwk, tenta ver se o ficheiro físico existe
         if not fa.exists() or not fb.exists():
             missing += 1
             continue
+
         rows.append((str(fa), str(fb), float(row["spr_distance"])))
-    print(f"Resolved {len(rows)} valid pairs ({missing} skipped)\n")
-    if not rows:
-        sys.exit("No valid pairs to train on. Check --csv and --zenodo_scripts paths.")
 
-    # ----- 2. Train / val / test split (random, seeded) -------------------- #
-    rng = np.random.RandomState(args.seed)
-    perm = rng.permutation(len(rows))
-    n_test = int(round(args.test_frac * len(rows)))
-    n_val = int(round(args.val_frac * len(rows)))
-    test_idx = perm[:n_test]
-    val_idx = perm[n_test:n_test + n_val]
-    train_idx = perm[n_test + n_val:]
-    train_rows = [rows[i] for i in train_idx]
-    val_rows = [rows[i] for i in val_idx]
-    test_rows = [rows[i] for i in test_idx]
-    print(f"Split: {len(train_rows)} train | {len(val_rows)} val | {len(test_rows)} test\n")
+    print(f"  -> Resolved {len(rows)} valid pairs ({missing} skipped) for {name}.\n")
+    return rows
 
-    # ----- 3. Cache all .nwk files; size num_species dynamically ----------- #
+
+# --------------------------------------------------------------------------- #
+# Main
+# --------------------------------------------------------------------------- #
+def main():
+    p = argparse.ArgumentParser(description="Train Siamese GIN SPR predictor with 3 distinct CSVs.")
+    p.add_argument("--train-csv", required=True, help="CSV containing training pairs")
+    p.add_argument("--val-csv", required=True, help="CSV containing validation pairs")
+    p.add_argument("--test-csv", required=True, help="CSV containing test pairs")
+    p.add_argument("--repository", required=True, help="Folder containing the .nwk files (repository)")
+    p.add_argument("--zenodo_scripts", help="Legacy duplicate argument for backwards compatibility")
+    p.add_argument("--out-dir", default="runs/spr_gnn", help="Where to save weights, training curve, predictions")
+
+    # training
+    p.add_argument("--num-epochs", type=int, default=300)
+    p.add_argument("--batch-size", type=int, default=16)
+    p.add_argument("--lr", type=float, default=1e-4)
+    p.add_argument("--weight-decay", type=float, default=1e-4)
+    p.add_argument("--patience", type=int, default=25, help="Early-stop patience on val MAE (epochs).")
+    p.add_argument("--lr-patience", type=int, default=10, help="ReduceLROnPlateau patience (epochs).")
+
+    # model
+    p.add_argument("--hidden-dim", type=int, default=128)
+    p.add_argument("--embed-dim", type=int, default=16)
+    p.add_argument("--dropout", type=float, default=0.3)
+    p.add_argument("--pool", default="add", choices=["add", "mean"])
+
+    # data configurations
+    p.add_argument("--seed", type=int, default=42)
+    p.add_argument("--log-target", action="store_true", help="Train on log1p(SPR); evaluate in original scale.")
+    p.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
+    args = p.parse_args()
+
+    set_seed(args.seed)
+    out_dir = Path(args.out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    repo_path = Path(args.repository if args.repository else args.zenodo_scripts)
+    device = torch.device(args.device)
+    print(f"Device: {device}\nSeed:   {args.seed}\nOutDir: {out_dir.resolve()}\n")
+
+    # ----- 1. Load CSVs and resolve file paths independently ---------------- #
+    train_rows = process_single_csv(Path(args.train_csv), repo_path, "TRAIN")
+    val_rows = process_single_csv(Path(args.val_csv), repo_path, "VALIDATION")
+    test_rows = process_single_csv(Path(args.test_csv), repo_path, "TEST")
+
+    all_loaded_rows = train_rows + val_rows + test_rows
+    if not all_loaded_rows:
+        sys.exit("No valid pairs found across any CSV. Check paths and files.")
+
+    print(f"Strict Splits: {len(train_rows)} train | {len(val_rows)} val | {len(test_rows)} test\n")
+
+    # ----- 2. Cache all .nwk files; size num_species dynamically ----------- #
     print("Parsing and caching .nwk -> PyG Data ...")
     cache = NwkCache()
-    used = sorted({p for triple in rows for p in triple[:2]})
+    used = sorted({p for triple in all_loaded_rows for p in triple[:2]})
     for i, path in enumerate(used, 1):
         try:
             cache.get(path)
@@ -156,11 +157,12 @@ def main():
             sys.exit(f"  Failed to parse {path}: {e}")
         if i % 50 == 0 or i == len(used):
             print(f"  cached {i}/{len(used)}")
+
     max_id = cache.max_node_id()
     num_species = max_id + 1
     print(f"\nMax node_id observed = {max_id}  ->  num_species = {num_species}\n")
 
-    # ----- 4. Datasets & loaders ------------------------------------------ #
+    # ----- 3. Datasets & loaders ------------------------------------------ #
     train_ds = PairDataset(train_rows, cache, log_target=args.log_target)
     val_ds   = PairDataset(val_rows,   cache, log_target=False)
     test_ds  = PairDataset(test_rows,  cache, log_target=False)
@@ -172,7 +174,7 @@ def main():
     test_loader  = DataLoader(test_ds, batch_size=args.batch_size,
                               shuffle=False, collate_fn=pair_collate)
 
-    # ----- 5. Model / optimiser / scheduler / loss ------------------------- #
+    # ----- 4. Model / optimiser / scheduler / loss ------------------------- #
     model = SPR_GIN_Predictor(
         input_dim=4,
         hidden_dim=args.hidden_dim,
@@ -182,14 +184,11 @@ def main():
         pool=args.pool,
     ).to(device)
 
-    optimiser = optim.Adam(model.parameters(),
-                           lr=args.lr, weight_decay=args.weight_decay)
-    scheduler = ReduceLROnPlateau(optimiser, mode="min",
-                                  factor=0.5, patience=args.lr_patience)
-    # Huber: robust to the long tail (mean=127, max=900) we saw in the data.
+    optimiser = optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
+    scheduler = ReduceLROnPlateau(optimiser, mode="min", factor=0.5, patience=args.lr_patience)
     criterion = nn.SmoothL1Loss()
 
-    # ----- 6. Train with early stopping ----------------------------------- #
+    # ----- 5. Train with early stopping ----------------------------------- #
     history, best_val_mae, best_epoch, since_best = [], float("inf"), 0, 0
     best_path = out_dir / "best_model.pth"
     print(f"Training up to {args.num_epochs} epochs (patience={args.patience}).\n")
@@ -237,7 +236,7 @@ def main():
 
     print(f"\nBest val MAE = {best_val_mae:.3f} at epoch {best_epoch}\n")
 
-    # ----- 7. Final test with the best weights ---------------------------- #
+    # ----- 6. Final test with the best weights ---------------------------- #
     model.load_state_dict(torch.load(best_path, map_location=device))
     t_t, t_p = evaluate(model, test_loader, device, args.log_target)
     mae, rmse, r2, mape = metrics(t_t, t_p)
@@ -261,9 +260,8 @@ def main():
 
     # Save artefacts
     pd.DataFrame(history).to_csv(out_dir / "training_curve.csv", index=False)
-    pd.DataFrame({"real": t_t, "pred": t_p}).to_csv(
-        out_dir / "test_predictions.csv", index=False
-    )
+    pd.DataFrame({"real": t_t, "pred": t_p}).to_csv(out_dir / "test_predictions.csv", index=False)
+
     with open(out_dir / "summary.txt", "w") as f:
         f.write(
             f"Best val MAE: {best_val_mae:.4f} (epoch {best_epoch})\n"

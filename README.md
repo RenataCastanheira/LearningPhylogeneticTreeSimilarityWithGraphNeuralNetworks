@@ -84,6 +84,60 @@ With this command, the script:
 
 ### How to use the tool pipeline for training 
 
-In progress...
+If you want to train a new model from scratch or retrain it with your own data, we developed a centralized training 
+pipeline in `tool/runTraining.py`.
+
+Unlike the prediction script, the training pipeline accepts **three separate and independent datasets** (Train, 
+Validation, and Test) to ensure strict partitioning without random blending or data leakage.
+
+To start the training process, navigate to the root project directory (<tool_dir>) and execute:
+
+```bash
+
+cd <tool_dir>
+python runTraining.py
+
+```
+> **Reproducibility Note:** Running `python runTraining.py` directly without modifying any command-line arguments will 
+> automatically train a GNN model using the exact architecture, datasets, and hyperparameter configurations presented 
+> in our original paper.
+>
+
+
+By default, the script checks for the Zenodo dataset, validates the tree references in the default CSV files
+(`scripts/train_gnn.csv`, `scripts/validation_gnn.csv`, and `scripts/test_gnn.csv`), and starts GIN model training.
+All training outputs, including the model weights, are stored in the `run` directory.
+
+**Custom Training Arguments:**
+
+You can adjust the training hyperparameters or provide custom input files directly from the command line:
+
+```bash
+python runTraining.py \
+    --train-csv <path_to_your_train>.csv \
+    --val-csv   <path_to_your_validation>.csv \
+    --test-csv  <path_to_your_test>.csv \
+    --out-dir   <runs_my_custom_experiment> \
+    --num-epochs 300 \
+    --batch-size 16 \
+    --patience 25 \
+    --lr 1e-4
+```
+
+**Available Training Flags**
+- Dataset paths:
+  - `--train-csv`: Path to the strict training set CSV.
+  - `--val-csv`: Path to the strict validation set CSV.
+  - `--test-csv`: Path to the strict test set CSV (used for final performance evaluation).
+- Output directory:
+  - `--out-dir`: Directory where the best weights (`best_model.pth`), loss curves (`training_curve.csv`), and training 
+  metrics summaries will be stored.
+- Hyperparameters:
+  - `--num-epochs`: Maximum number of training epochs (default: `300`).
+  - `--batch-size`: Number of pairs processed per batch (default: `16`).
+  - `--patience`: Early stopping patience (epochs to wait for validation MAE improvement before halting, default: `25`).
+  - `--lr`: Learning rate for the Adam optimizer (default: `1e-4`).
+
+
 
 

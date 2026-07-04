@@ -5,31 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9f84a103-6328-4065-826e-0c5259e530b8" name="Changes" comment="add necessary dependencies to the README.md file">
-      <change afterPath="$PROJECT_DIR$/dockerSettings/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dockerSettings/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/validation_gnn.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weights/best_model.pth" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weights/grafico_calibracao_spr.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weights/ma_trace_desvio_histogramas.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weights/summary.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weights/test_predictions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weights/training_curve.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zenodo_scripts/download_zenodo.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zenodo_scripts/run_pipeline.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/runTraining.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/settings/utils_pipeline.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/architecture/GINArchitecture.py" beforeDir="false" afterPath="$PROJECT_DIR$/architecture/GINArchitecture.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/architecture/newickToData.py" beforeDir="false" afterPath="$PROJECT_DIR$/architecture/newickToData.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/predict.py" beforeDir="false" afterPath="$PROJECT_DIR$/predict.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/processTree.py" beforeDir="false" afterPath="$PROJECT_DIR$/processTree.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/spr_gnn_base/best_model.pth" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/test_gnn.csv" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/test_gnn.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/train_gnn.csv" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/train_gnn.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/runPredictions.py" beforeDir="false" afterPath="$PROJECT_DIR$/runPredictions.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="28" />
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -46,6 +36,13 @@
     &quot;accountId&quot;: &quot;835d0489-eecd-4fe3-aa1a-731b456762e5&quot;
   }
 }</component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -56,6 +53,8 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
@@ -76,6 +75,9 @@
       <recent name="$PROJECT_DIR$/scripts" />
       <recent name="$PROJECT_DIR$/weights" />
       <recent name="$PROJECT_DIR$/architecture" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -123,6 +125,9 @@
       <workItem from="1780233643693" duration="2197000" />
       <workItem from="1780324632072" duration="92000" />
       <workItem from="1782730473176" duration="15283000" />
+      <workItem from="1782819376177" duration="12113000" />
+      <workItem from="1782931477139" duration="37000" />
+      <workItem from="1783068835713" duration="11712000" />
     </task>
     <task id="LOCAL-00001" summary="Version Beta">
       <option name="closed" value="true" />
@@ -161,5 +166,16 @@
     <MESSAGE value="Version Beta" />
     <MESSAGE value="add necessary dependencies to the README.md file" />
     <option name="LAST_COMMIT_MESSAGE" value="add necessary dependencies to the README.md file" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/processTree.py</url>
+          <line>283</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
