@@ -46,14 +46,13 @@ conda activate gnn_env
 ```
 
 ### How to use the tool pipeline for prediction
-We developed owr tool centralized in `tool/runPredictions.py` that automatically resolves the CSV relative paths and handles
+We developed owr tool centralized in `runPredictions.py` that automatically resolves the CSV relative paths and handles
 the data download from Zenodo.
 
-To run  predictions on your own computer, go into the `tool` directory and execute:
+To run  predictions on your own computer, go into the `<tool_dir>` directory and execute:
 ```bash
 cd <tool_dir>
-python runPredictions.py
-       --csv <your_prefiction_file>.csv
+python runPredictions.py --csv <your_prefiction_file>.csv
 ```
 > **Note:** An example prediction file is available at:
 >
@@ -69,17 +68,16 @@ The `<tool_dir>` in the `cd` command refers to the project's root directory. All
        --model_weights  <your_trained_weights>.pth
 ```
 - `--out-predictions`: path where the final results will be saved. If omitted, the results are saved to
-  `tool/scripts/FINAL_RESULTS.csv`.
+  `<tool_dir>/scripts/FINAL_RESULTS.csv`.
 ```bash
        --out-predictions <your_final_results>.csv 
 ```
 With this command, the script:
-1.  Checks whether the `tool/repository/` folder exists locally. If it does not, it downloads the
+1.  Checks whether the `<tool_dir>/repository/` folder exists locally. If it does not, it downloads the
    `phylogenetic_tree_dataset.zip` package from Zenodo and extracts all phylogenetic trees.
 2. Automatically cleans and normalizes the tree file names.
 3. Validates and filters the CSV file.
-4. Loads the model with the trained weights and saves the final results to `your/final_results.csv`.
-
+4. Loads the model with the trained weights and saves the final results to `<your_final_results>.csv`.
 
 
 ### How to use the tool pipeline for training 

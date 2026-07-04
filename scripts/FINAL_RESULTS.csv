@@ -1,0 +1,11 @@
+specie,size,patha,pathb,predicted_spr_distance
+clostridium,small,repository/clostridium_318_upgma.nwk, repository/clostridium_318_sh_upgma.nwk,12.5709867477417
+clostridium,small,repository/clostridium_90_nj.nwk, repository/clostridium_90_nj.nwk,9.414342880249023
+vibrio,small,repository/vibrio_545_nj.nwk, repository/vibrio_545_sh_nj.nwk,59.661502838134766
+pneumonia,small,repository/pneumonia_166_upgma.nwk,repository/pneumonia_166_nj.nwk,6.268898010253906
+pneumonia,small,repository/pneumonia_393_nj.nwk,repository/pneumonia_393_sh_nj.nwk,19.168581008911133
+salmonella,small,repository/salmonella_848_upgma.nwk,repository/salmonella_848_sh_upgma.nwk,20.48103141784668
+pneumonia,medium,repository/pneumonia_3667_upgma.nwk,repository/pneumonia_3667_nj.nwk,46.21955871582031
+pneumonia,medium,repository/pneumonia_5000_nj.nwk,repository/pneumonia_5000_sh_nj.nwk,135.0096893310547
+salmonella,medium,repository/salmonella_5333_upgma.nwk,repository/salmonella_5333_sh_upgma.nwk,324.5323181152344
+vibrio,medium,repository/vibrio_3333_upgma.nwk,repository/vibrio_3333_nj.nwk,274.9019470214844
