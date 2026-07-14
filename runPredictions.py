@@ -101,7 +101,7 @@ def main():
     sys.argv = [
         "predict.py",
         "--csv", str(csv_pronto),
-        "--zenodo_scripts", str(diretoria_base),
+        "--zenodo_scripts", str(target_repo),
         "--model_weights", args.model_weights,
         "--out-predictions", args.out_predictions,
         "--hidden-dim", str(args.hidden_dim),

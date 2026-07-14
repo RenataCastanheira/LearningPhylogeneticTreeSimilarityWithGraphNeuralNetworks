@@ -4,14 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9f84a103-6328-4065-826e-0c5259e530b8" name="Changes" comment="remove unecessary files" />
+    <list default="true" id="9f84a103-6328-4065-826e-0c5259e530b8" name="Changes" comment="remove unecessary files">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="30" />
+    <option name="cachedIndexableFilesCount" value="862" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="Git.Settings">
@@ -54,7 +57,7 @@
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
     &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/renata/Desktop/6semestre/PS/GNN_trainning/tool/scripts&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/renata/LearningPhylogeneticTreeSimilarityWithGraphNeuralNetworks&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -122,6 +125,9 @@
       <workItem from="1782931477139" duration="37000" />
       <workItem from="1783068835713" duration="19300000" />
       <workItem from="1783708707789" duration="2403000" />
+      <workItem from="1783878953562" duration="4079000" />
+      <workItem from="1784026030063" duration="27000" />
+      <workItem from="1784052401092" duration="630000" />
     </task>
     <task id="LOCAL-00001" summary="Version Beta">
       <option name="closed" value="true" />
